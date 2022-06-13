@@ -56,8 +56,7 @@ public class Main {
         printPopulation(population,"MODIFY LATER! MAYBE PUT INGREDIENTS");
 
         int generationNumber = 0;
-        int minimumProteinIntake = 400;
-        while (population.getChromosomes()[0].getFitness()<minimumProteinIntake && generationNumber<10){
+        while (generationNumber<50){
             generationNumber++;
             System.out.println("\n ---------------------------");
             population = geneticAlgorithm.evolve(population);

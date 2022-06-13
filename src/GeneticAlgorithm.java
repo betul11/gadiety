@@ -3,7 +3,7 @@ public class GeneticAlgorithm {
 
 public static final int populationSize = 25;
     public static final int noOfEliteChromosomes = 1;
-    public static final int tournamentSelectionSize = 4;
+    public static final int tournamentSelectionSize = 24;
     private static final double mutationRate = 0.1;
 
     public Population evolve(Population population){

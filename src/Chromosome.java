@@ -40,7 +40,7 @@ public class Chromosome {
        // System.out.println("INSIDE INITIALIZE CHROMOSOME\n");
 
         for(int i=0;i<genes.length;i++){
-            if(Math.random()>0.8) genes[i]=1;
+            if(Math.random()>0.5) genes[i]=1;
             else genes[i]=0;
         }
      //   System.out.println("CHROMOSOME INITIALIZED\n");
@@ -60,34 +60,35 @@ public class Chromosome {
       //  System.out.println("INSIDE CALCULATE FITNESS\n");
 
         double totalProtein = 0;
+        double totalProteinTrial =0;
         int totalCalorie = 0;
+        int totalCalorieTrial = 0;
 
 
     //    System.out.println("INSIDE FITNESS CALCULATION LOOP\n");
         for(int i=0;i<genes.length;i++){
 
             if (genes[i] == 1) {
-           //     System.out.println("INSIDE IFFFFF CALCULATION LOOP\n");
 
-                totalProtein = totalProtein + reader3ammo.ingredients.get(i).getProtein();
-                totalCalorie = totalCalorie + reader3ammo.ingredients.get(i).getCalorie();
+                totalProteinTrial = totalProtein + reader3ammo.ingredients.get(i).getProtein();
+                totalCalorieTrial = totalCalorie + reader3ammo.ingredients.get(i).getCalorie();
 
-             //   System.out.println("IF GENE IS 1\n");
-              }
+                if( totalCalorieTrial > main.maxCalorieIntake){
+                    while (i<genes.length){
+
+                        genes[i]=0;
+                        i++;
+                     }
+                    return totalProtein;
+
+                }
+                totalCalorie = totalCalorieTrial;
+                totalProtein = totalProteinTrial;
+
+                 }
 
         }
-         //  System.out.println("FITNESS CALCULATED\n");
-            if( totalCalorie > main.maxCalorieIntake){
-            /*    int differenceBetweenCalories = totalCalorie - main.maxCalorieIntake;
-                if(differenceBetweenCalories> 20 ){
 
-                    // ASK ABOUT THIS
-                }
-           */
-             totalProtein = 0;
-
-            }
-        // if calorie intake is more than accepted return fitness is zero
        return totalProtein;
     }
 
