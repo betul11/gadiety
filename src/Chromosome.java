@@ -3,6 +3,7 @@ import com.opencsv.CSVReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Vector;
 
 
@@ -58,37 +59,29 @@ public class Chromosome {
 
     public double recalculateFitness() throws IOException {
       //  System.out.println("INSIDE CALCULATE FITNESS\n");
-
         double totalProtein = 0;
-        double totalProteinTrial =0;
         int totalCalorie = 0;
-        int totalCalorieTrial = 0;
-
-
     //    System.out.println("INSIDE FITNESS CALCULATION LOOP\n");
+
         for(int i=0;i<genes.length;i++){
-
+            label:
             if (genes[i] == 1) {
+                if( totalCalorie + reader3ammo.ingredients.get(i).getCalorie() > main.maxCalorieIntake){
+                    Random rand = new Random();
 
-                totalProteinTrial = totalProtein + reader3ammo.ingredients.get(i).getProtein();
-                totalCalorieTrial = totalCalorie + reader3ammo.ingredients.get(i).getCalorie();
+                     // nextInt as provided by Random is exclusive of the top value so you need to add 1
 
-                if( totalCalorieTrial > main.maxCalorieIntake){
-                    while (i<genes.length){
-
-                        genes[i]=0;
-                        i++;
-                     }
-                    return totalProtein;
-
+                    int randomPosition = rand.nextInt(genesLength);
+                    genes[randomPosition]=0;
+                    totalProtein=0;
+                    totalCalorie=0;
+                    i=0;
+                    break label;
                 }
-                totalCalorie = totalCalorieTrial;
-                totalProtein = totalProteinTrial;
-
-                 }
-
+                totalProtein = totalProtein + reader3ammo.ingredients.get(i).getProtein();
+                totalCalorie = totalCalorie + reader3ammo.ingredients.get(i).getCalorie();
+            }
         }
-
        return totalProtein;
     }
 

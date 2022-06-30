@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Main {
 
     public static int maxCalorieIntake;
-
     public static void main(String[] args) throws IOException {
         Reader3ammo reader = new Reader3ammo();
         reader.CSVReaderMethod();
@@ -53,7 +52,7 @@ public class Main {
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm();
         System.out.println("------------------------");
         System.out.println("Generation #0"+"| Fittest chromosome fitness:"+population.getChromosomes()[0].getFitness());
-        printPopulation(population,"MODIFY LATER! MAYBE PUT INGREDIENTS");
+        printPopulation(population);
 
         int generationNumber = 0;
         while (generationNumber<50){
@@ -62,7 +61,7 @@ public class Main {
             population = geneticAlgorithm.evolve(population);
             population.sortChromosomesByFitness();
             System.out.println("Generation #"+ generationNumber+ " | Fittest chromosome fitness:"+population.getChromosomes()[0].getFitness());
-            printPopulation(population,"MODIFY LATER! MAYBE PUT INGREDIENTS");
+            printPopulation(population);
 
         }
 
@@ -73,16 +72,25 @@ public class Main {
          maxCalorieIntake=2400;
     }
 
-    public static void printPopulation(Population population, String heading) throws IOException {
-        System.out.println(heading);
+    public static void printPopulation(Population population) throws IOException {
+        printIngredients(population.getChromosomes()[0]);
         System.out.println("------------------------");
         for(int i=0;i<population.getChromosomes().length;i++){
 
             System.out.println("Chromosome #" +i+":"+ Arrays.toString(population.getChromosomes()[i].getGenes())+
              "| Fitness" + population.getChromosomes()[i].getFitness());
         }
+    }
 
-
+    public static void printIngredients(Chromosome chromosome) throws IOException {
+        Reader3ammo reader = new Reader3ammo();
+        reader.CSVReaderMethod();
+        int [] genes = chromosome.getGenes();
+        for (int i =0; i<chromosome.getGenesLength(); i++){
+            if (genes[i] == 1) {
+                System.out.println(reader.ingredients.get(i).getName() + ", protein: " + reader.ingredients.get(i).getProtein() + ", calories: " + reader.ingredients.get(i).getCalorie() + " ---- ");
+            }
+        }
 
     }
 }
