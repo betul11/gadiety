@@ -34,6 +34,7 @@ public class Main {
         s.nextLine();
 
         System.out.println("Are you looking to lose weight? y/n");
+
         boolean loseWeight = false;
         if (s.nextLine().equals("y")) {
             loseWeight = true;
