@@ -49,6 +49,7 @@ public class Main {
 
         int generationNumber = 0;
         while (generationNumber < 50) {
+
             generationNumber++;
             System.out.println("\n ---------------------------");
             population = geneticAlgorithm.evolve(population);
@@ -64,15 +65,15 @@ public class Main {
     public static void calculateMaxCalorie(int gender, boolean loseWeight) {
         if (loseWeight) {
             if (gender == 1) {
-                maxCalorieIntake = 1500;
+                maxCalorieIntake = 375; // 25% of the recommended average maxCalorieIntake (1500)
             } else {
-                maxCalorieIntake = 2000;
+                maxCalorieIntake = 500; // 25% of the recommended average maxCalorieIntake (2000)
             }
         } else {
             if (gender == 1) {
-                maxCalorieIntake = 2000;
+                maxCalorieIntake = 500; // 25% of the recommended average maxCalorieIntake (2000)
             } else {
-                maxCalorieIntake = 2500;
+                maxCalorieIntake = 625; // 25% of the recommended average maxCalorieIntake (2500)
             }
         }
     }
@@ -82,7 +83,7 @@ public class Main {
         System.out.println("------------------------");
         for (int i = 0; i < population.getChromosomes().length; i++) {
             System.out.println("Chromosome #" + i + ":" + Arrays.toString(population.getChromosomes()[i].getGenes()) +
-                    "| Fitness" + population.getChromosomes()[i].getFitness());
+                    "| Fitness " + population.getChromosomes()[i].getFitness());
         }
     }
 
